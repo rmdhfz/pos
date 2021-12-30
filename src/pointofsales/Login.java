@@ -111,6 +111,11 @@ public class Login extends javax.swing.JFrame {
         });
 
         LabelLupaPassword.setText("Lupa Password");
+        LabelLupaPassword.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelLupaPasswordMouseClicked(evt);
+            }
+        });
         LabelLupaPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 LabelLupaPasswordKeyPressed(evt);
@@ -241,6 +246,11 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextBoxPasswordActionPerformed
 
+    private void LabelLupaPasswordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelLupaPasswordMouseClicked
+        // TODO add your handling code here:
+        new LupaPassword().setVisible(true); dispose();
+    }//GEN-LAST:event_LabelLupaPasswordMouseClicked
+    
     /**
      * @param args the command line arguments
      */
