@@ -154,17 +154,22 @@ public class Pengguna extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setText("Formulir: Data Pengguna");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel4.setText("Nama");
 
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel5.setText("Email");
 
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Dashboard / Master Pengguna");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel2.setText("Versi: 1.0");
 
+        LabelJam.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         LabelJam.setText("Jam");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel6.setText("Password");
 
         ButtonSimpanPengguna.setText("Kirim");
@@ -194,6 +199,7 @@ public class Pengguna extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(PenggunaTabel);
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel7.setText("Username");
 
         LabelJumlahData.setText("Jumlah Data:");
