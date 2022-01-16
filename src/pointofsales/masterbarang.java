@@ -5,21 +5,72 @@
  */
 package pointofsales;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+
 /**
  *
  * @author aksalfirmansyah
  */
-
-
 public class masterbarang extends javax.swing.JFrame {
 
+    private Connection conn;
+    private java.beans.Statement stat;
+    private ResultSet res;
+    private String t;
+    private DefaultTableModel dtm;
+    private String Tabelbarang = "barang";
+
+    
+    
     /**
      * Creates new form masterbarang
      */
     public masterbarang() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        koneksi();
+        initDataTable();
+        
     }
-
+    
+    private void koneksi(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/pointofsales", "root", "");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
+    
+    
+    private void initDataTable(){
+        DefaultTableModel t = new DefaultTableModel();
+        t.addColumn("Kode");
+        t.addColumn("Nama");
+        t.addColumn("Harga");
+        t.addColumn("Jumlah");
+        
+        tblmasterbarang.setModel(t);
+        try {
+            res = conn.createStatement().executeQuery("SELECT * FROM "+Tabelbarang+" ");
+            
+            while(res.next()){
+                t.addRow(new Object[]{
+                    res.getString("kode"),
+                    res.getString("nama"),
+                    res.getString("harga"),
+                    res.getString("Jumlah"),
+                });
+            }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(rootPane, e);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,38 +84,93 @@ public class masterbarang extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        txthargabarang = new javax.swing.JTextField();
+        txtkodebarang = new javax.swing.JTextField();
+        txtnamabarang = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tbl1 = new javax.swing.JTable();
-        txtkdbrg = new javax.swing.JTextField();
-        txtnmabrng = new javax.swing.JTextField();
-        txthrgasatuan = new javax.swing.JTextField();
-        txtjmlh = new javax.swing.JTextField();
-        btntambah = new javax.swing.JButton();
+        txtjumlah = new javax.swing.JTextField();
+        btnsave = new javax.swing.JButton();
         btnhapus = new javax.swing.JButton();
+        btnclear = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblmasterbarang = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         btnupdate = new javax.swing.JButton();
-        btnkembali = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Master Barang");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, -1, -1));
 
         jLabel2.setText("Kode Barang");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
 
-        jLabel3.setText("Nama barang");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, -1, -1));
+        jLabel3.setText("Nama Barang");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        jLabel4.setText("Harga Satuan");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, -1, -1));
+        jLabel4.setText("Jumlah Barang");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, -1, -1));
 
-        jLabel5.setText("Jumlah");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, -1, -1));
+        txthargabarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txthargabarangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txthargabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 120, 130, -1));
 
-        tbl1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, null, java.awt.Color.lightGray, null, null));
-        tbl1.setModel(new javax.swing.table.DefaultTableModel(
+        txtkodebarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtkodebarangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtkodebarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 130, -1));
+
+        txtnamabarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnamabarangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtnamabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 130, -1));
+
+        jLabel5.setText("Harga barang");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, -1, -1));
+        getContentPane().add(txtjumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 130, -1));
+
+        btnsave.setText("Simpan");
+        btnsave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsaveActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnsave, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, -1, -1));
+
+        btnhapus.setText("Hapus");
+        btnhapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnhapusActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnhapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, 90, -1));
+
+        btnclear.setText("Clear");
+        btnclear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnclearActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 90, -1));
+
+        jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 220, 90, -1));
+
+        tblmasterbarang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -72,68 +178,100 @@ public class masterbarang extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Kode Barang", "Nama Barang", "Harga Satuan", "Jumlah"
+                "Kode", "Nama", "Harga", "Jumlah"
             }
         ));
-        jScrollPane1.setViewportView(tbl1);
+        jScrollPane1.setViewportView(tblmasterbarang);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1, 190));
-
-        txtkdbrg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtkdbrgActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtkdbrg, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 170, -1));
-
-        txtnmabrng.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtnmabrngActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtnmabrng, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 170, -1));
-        getContentPane().add(txthrgasatuan, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 110, 170, -1));
-        getContentPane().add(txtjmlh, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 170, -1));
-
-        btntambah.setText("Tambah");
-        btntambah.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btntambahActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btntambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, -1));
-
-        btnhapus.setText("Hapus");
-        getContentPane().add(btnhapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 90, 90, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 330, 220));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, -1, 290));
 
         btnupdate.setText("Update");
-        getContentPane().add(btnupdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, -1, -1));
-
-        btnkembali.setText("Kembali");
-        getContentPane().add(btnkembali, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 90, -1, -1));
+        btnupdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnupdateActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnupdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, 90, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtkdbrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtkdbrgActionPerformed
+    private void txthargabarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txthargabarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtkdbrgActionPerformed
+    }//GEN-LAST:event_txthargabarangActionPerformed
 
-    private void txtnmabrngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnmabrngActionPerformed
+    private void txtkodebarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtkodebarangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtnmabrngActionPerformed
+    }//GEN-LAST:event_txtkodebarangActionPerformed
 
-    private void btntambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btntambahActionPerformed
+    private void txtnamabarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnamabarangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtnamabarangActionPerformed
+
+    private void btnclearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnclearActionPerformed
+        txthargabarang.setText(null);
+        txtkodebarang.setText(null);
+        txtjumlah.setText(null);
+        txtnamabarang.setText(null);        // TODO add your handling code here:
+    }//GEN-LAST:event_btnclearActionPerformed
+
+    private void btnsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsaveActionPerformed
+        String Kode, Nama, Harga, Jumlah;
+        
+        Kode        = txtkodebarang.getText();
+        Nama    = txtnamabarang.getText();
+        Harga       = txthargabarang.getText();
+        Jumlah        = txtjumlah.getText();
+        
         try {
-            String sql = "INSERT INTO mhs VALUES ('"+txtkdbrg.getText()+"','"+txtnmabrng.getText()+"','"+txthrgasatuan.getText()+"','"+txtjmlh.getText()+"')";
-            java.sql.Connection conn=(Connection)config.configDB();
-            java.sql.PreparedStatement pst=conn.prepareStatement(sql);
-            pst.execute();
-            JOptionPane.showMessageDialog(null, "Penyimpanan Data Berhasil");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
+            conn.createStatement().executeUpdate("INSERT INTO barang (kode, nama, harga, jumlah) VALUES ("
+                + "'" + Kode + "',"
+                + "'" + Nama + "',"
+                + "'" + Harga + "',"
+                + "'" + Jumlah +"')");
+            JOptionPane.showMessageDialog(null, "Berhasil menyimpan data!");
+            initDataTable();
+        } catch (Exception e){
+            // tampilkan pesan kesalahan try catch
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }// TODO add your handling code here:
-    }//GEN-LAST:event_btntambahActionPerformed
+    }//GEN-LAST:event_btnsaveActionPerformed
+
+    private void btnhapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnhapusActionPerformed
+        String Kode, Nama, Harga, Jumlah;
+        Kode     =txtkodebarang.getText();
+        try {
+            conn.createStatement().executeUpdate("DELETE FROM barang WHERE KODE='"+ Kode + "'");
+            JOptionPane.showMessageDialog(null, "Berhasil menghapus data!");
+            initDataTable();
+        } catch (Exception e){
+            // tampilkan pesan kesalahan try catch
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_btnhapusActionPerformed
+
+    private void btnupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnupdateActionPerformed
+        String Kode, Nama, Harga, Jumlah;
+        
+        Kode        = txtkodebarang.getText();
+        Nama    = txtnamabarang.getText();
+        Harga       = txthargabarang.getText();
+        Jumlah        = txtjumlah.getText();
+        
+        try {
+            conn.createStatement().executeUpdate("UPDATE barang set nama='" + Nama + "',"+ "harga='" + Harga + "',"+ "Jumlah='" + Jumlah +"' "+"where kode='"+Kode+"'");
+            JOptionPane.showMessageDialog(null, "Berhasil Update data!");
+            initDataTable();
+        } catch (Exception e){
+            // tampilkan pesan kesalahan try catch
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_btnupdateActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new Dashboard().setVisible(true); dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,20 +309,22 @@ public class masterbarang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnclear;
     private javax.swing.JButton btnhapus;
-    private javax.swing.JButton btnkembali;
-    private javax.swing.JButton btntambah;
+    private javax.swing.JButton btnsave;
     private javax.swing.JButton btnupdate;
+    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbl1;
-    private javax.swing.JTextField txthrgasatuan;
-    private javax.swing.JTextField txtjmlh;
-    private javax.swing.JTextField txtkdbrg;
-    private javax.swing.JTextField txtnmabrng;
+    private javax.swing.JTable tblmasterbarang;
+    private javax.swing.JTextField txthargabarang;
+    private javax.swing.JTextField txtjumlah;
+    private javax.swing.JTextField txtkodebarang;
+    private javax.swing.JTextField txtnamabarang;
     // End of variables declaration//GEN-END:variables
 }

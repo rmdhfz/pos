@@ -138,7 +138,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jMenu1.setText("Master Data");
 
-        MenuMasterBarang.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
+        MenuMasterBarang.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_DOWN_MASK));
         MenuMasterBarang.setText("Master Barang");
         MenuMasterBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +147,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         jMenu1.add(MenuMasterBarang);
 
-        MenuMasterPengguna.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
+        MenuMasterPengguna.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
         MenuMasterPengguna.setText("Master Pengguna");
         MenuMasterPengguna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,7 +208,7 @@ public class Dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void MenuMasterBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuMasterBarangActionPerformed
-        // TODO add your handling code here:
+        new masterbarang().setVisible(true); dispose();// TODO add your handling code here:
     }//GEN-LAST:event_MenuMasterBarangActionPerformed
 
     private void MenuMasterPenggunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuMasterPenggunaActionPerformed
