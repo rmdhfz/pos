@@ -15,6 +15,7 @@
             <word>Bantuan</word>
             <word>masterbarang</word>
             <word>Pengguna</word>
+            <word>Transaksi</word>
         </spellchecker-wordlist>
     </configuration>
 </project>

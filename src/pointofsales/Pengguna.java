@@ -21,6 +21,16 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
+import java.io.File;
+import java.sql.Connection;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author mdm
@@ -145,12 +155,13 @@ public class Pengguna extends javax.swing.JFrame {
         ButtonCari = new javax.swing.JButton();
         ButtonUpdate = new javax.swing.JButton();
         ButtonHapus = new javax.swing.JButton();
+        ButtonCetak = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        MenuTransaksi = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
@@ -240,6 +251,13 @@ public class Pengguna extends javax.swing.JFrame {
             }
         });
 
+        ButtonCetak.setText("Cetak");
+        ButtonCetak.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCetakActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -286,6 +304,8 @@ public class Pengguna extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(ButtonHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ButtonCetak)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(ButtonRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -343,10 +363,12 @@ public class Pengguna extends javax.swing.JFrame {
                             .addComponent(ButtonSimpanPengguna)
                             .addComponent(ButtonBersihkanPengguna))))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButtonRefresh)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ButtonUpdate)
-                    .addComponent(ButtonHapus))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ButtonRefresh)
+                        .addComponent(ButtonHapus)
+                        .addComponent(ButtonCetak)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelJam)
@@ -379,8 +401,13 @@ public class Pengguna extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Transaksi");
-        jMenuBar1.add(jMenu2);
+        MenuTransaksi.setText("Transaksi");
+        MenuTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuTransaksiMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(MenuTransaksi);
 
         jMenu3.setText("Laporan");
         jMenuBar1.add(jMenu3);
@@ -584,6 +611,22 @@ public class Pengguna extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ButtonHapusActionPerformed
 
+    private void MenuTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTransaksiMouseClicked
+        // TODO add your handling code here:
+        new Transaksi().setVisible(true); dispose();
+    }//GEN-LAST:event_MenuTransaksiMouseClicked
+
+    private void ButtonCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCetakActionPerformed
+        File namafile = new File("src/Laporan/pengguna.jasper");
+        JasperPrint jp = null;
+        try {
+            jp = JasperFillManager.fillReport(namafile.getPath(), null, conn);
+        } catch (JRException ex) {
+            Logger.getLogger(Pengguna.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JasperViewer.viewReport(jp, false);
+    }//GEN-LAST:event_ButtonCetakActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -622,6 +665,7 @@ public class Pengguna extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonBersihkanPengguna;
     private javax.swing.JButton ButtonCari;
+    private javax.swing.JButton ButtonCetak;
     private javax.swing.JButton ButtonHapus;
     private javax.swing.JButton ButtonRefresh;
     private javax.swing.JButton ButtonSimpanPengguna;
@@ -629,6 +673,7 @@ public class Pengguna extends javax.swing.JFrame {
     private javax.swing.JTextField EmailPengguna;
     private javax.swing.JLabel LabelJam;
     private javax.swing.JLabel LabelJumlahData;
+    private javax.swing.JMenu MenuTransaksi;
     private javax.swing.JTextField NamaPengguna;
     private javax.swing.JPasswordField PasswordPengguna;
     private javax.swing.JTable PenggunaTabel;
@@ -642,7 +687,6 @@ public class Pengguna extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;

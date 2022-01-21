@@ -115,7 +115,6 @@ public class masterbarang extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -134,12 +133,14 @@ public class masterbarang extends javax.swing.JFrame {
         btnupdate = new javax.swing.JButton();
         LabelJam = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu9 = new javax.swing.JMenu();
+        MenuTransaksi = new javax.swing.JMenu();
         jMenu10 = new javax.swing.JMenu();
         jMenu11 = new javax.swing.JMenu();
         jMenu12 = new javax.swing.JMenu();
@@ -199,42 +200,39 @@ public class masterbarang extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Master Barang");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 20, -1, -1));
-
         jLabel2.setText("Kode Barang");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         jLabel3.setText("Nama Barang");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
         jLabel4.setText("Jumlah Barang");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
 
         txthargabarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txthargabarangActionPerformed(evt);
             }
         });
-        getContentPane().add(txthargabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 170, -1));
+        getContentPane().add(txthargabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 170, -1));
 
         txtkodebarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtkodebarangActionPerformed(evt);
             }
         });
-        getContentPane().add(txtkodebarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 170, -1));
+        getContentPane().add(txtkodebarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 170, -1));
 
         txtnamabarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtnamabarangActionPerformed(evt);
             }
         });
-        getContentPane().add(txtnamabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 170, -1));
+        getContentPane().add(txtnamabarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 170, -1));
 
         jLabel5.setText("Harga barang");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-        getContentPane().add(txtjumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 150, 170, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        getContentPane().add(txtjumlah, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 170, 170, -1));
 
         btnsave.setText("Simpan");
         btnsave.addActionListener(new java.awt.event.ActionListener() {
@@ -242,7 +240,7 @@ public class masterbarang extends javax.swing.JFrame {
                 btnsaveActionPerformed(evt);
             }
         });
-        getContentPane().add(btnsave, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 90, -1));
+        getContentPane().add(btnsave, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 90, -1));
 
         btnhapus.setText("Hapus");
         btnhapus.addActionListener(new java.awt.event.ActionListener() {
@@ -250,7 +248,7 @@ public class masterbarang extends javax.swing.JFrame {
                 btnhapusActionPerformed(evt);
             }
         });
-        getContentPane().add(btnhapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 140, -1));
+        getContentPane().add(btnhapus, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 140, -1));
 
         btnclear.setText("Bersih");
         btnclear.addActionListener(new java.awt.event.ActionListener() {
@@ -258,7 +256,7 @@ public class masterbarang extends javax.swing.JFrame {
                 btnclearActionPerformed(evt);
             }
         });
-        getContentPane().add(btnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 240, -1));
+        getContentPane().add(btnclear, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 240, -1));
 
         jButton4.setText("Kembali");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +264,7 @@ public class masterbarang extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 140, -1));
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 140, -1));
 
         tblmasterbarang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -281,7 +279,7 @@ public class masterbarang extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblmasterbarang);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 490, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 500, 110));
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, -1, 290));
 
         btnupdate.setText("Update");
@@ -290,15 +288,23 @@ public class masterbarang extends javax.swing.JFrame {
                 btnupdateActionPerformed(evt);
             }
         });
-        getContentPane().add(btnupdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 90, -1));
+        getContentPane().add(btnupdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 90, -1));
 
         LabelJam.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         LabelJam.setText("Jam");
-        getContentPane().add(LabelJam, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        getContentPane().add(LabelJam, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel6.setText("Versi: 1.0");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 320, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 320, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel7.setText("Formulir: Master Barang");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, -1, -1));
+
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setText("Dashboard / Master Barang");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, -1));
 
         jMenu7.setText("Dashboard");
         jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -325,8 +331,13 @@ public class masterbarang extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu8);
 
-        jMenu9.setText("Transaksi");
-        jMenuBar2.add(jMenu9);
+        MenuTransaksi.setText("Transaksi");
+        MenuTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuTransaksiMouseClicked(evt);
+            }
+        });
+        jMenuBar2.add(MenuTransaksi);
 
         jMenu10.setText("Laporan");
         jMenuBar2.add(jMenu10);
@@ -479,6 +490,11 @@ public class masterbarang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu12ActionPerformed
 
+    private void MenuTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTransaksiMouseClicked
+        // TODO add your handling code here:
+        new Transaksi().setVisible(true); dispose();
+    }//GEN-LAST:event_MenuTransaksiMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -516,6 +532,7 @@ public class masterbarang extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelJam;
+    private javax.swing.JMenu MenuTransaksi;
     private javax.swing.JButton btnclear;
     private javax.swing.JButton btnhapus;
     private javax.swing.JButton btnsave;
@@ -527,6 +544,7 @@ public class masterbarang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu10;
     private javax.swing.JMenu jMenu11;
@@ -538,7 +556,6 @@ public class masterbarang extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
-    private javax.swing.JMenu jMenu9;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;

@@ -75,7 +75,7 @@ public class Dashboard extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         MenuMasterBarang = new javax.swing.JMenuItem();
         MenuMasterPengguna = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        MenuTransaksi = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu5 = new javax.swing.JMenu();
@@ -138,7 +138,7 @@ public class Dashboard extends javax.swing.JFrame {
 
         jMenu1.setText("Master Data");
 
-        MenuMasterBarang.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        MenuMasterBarang.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_B, java.awt.event.InputEvent.ALT_MASK));
         MenuMasterBarang.setText("Master Barang");
         MenuMasterBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,7 +147,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         jMenu1.add(MenuMasterBarang);
 
-        MenuMasterPengguna.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_DOWN_MASK));
+        MenuMasterPengguna.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.ALT_MASK));
         MenuMasterPengguna.setText("Master Pengguna");
         MenuMasterPengguna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -158,8 +158,13 @@ public class Dashboard extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Transaksi");
-        jMenuBar1.add(jMenu2);
+        MenuTransaksi.setText("Transaksi");
+        MenuTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MenuTransaksiMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(MenuTransaksi);
 
         jMenu3.setText("Laporan");
         jMenuBar1.add(jMenu3);
@@ -234,6 +239,11 @@ public class Dashboard extends javax.swing.JFrame {
         new Bantuan().setVisible(true); dispose();
     }//GEN-LAST:event_jMenu4MouseClicked
 
+    private void MenuTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MenuTransaksiMouseClicked
+        // TODO add your handling code here:
+        new Transaksi().setVisible(true); dispose();
+    }//GEN-LAST:event_MenuTransaksiMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -273,11 +283,11 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel LabelJam;
     private javax.swing.JMenuItem MenuMasterBarang;
     private javax.swing.JMenuItem MenuMasterPengguna;
+    private javax.swing.JMenu MenuTransaksi;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
