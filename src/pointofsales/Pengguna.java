@@ -11,9 +11,13 @@ import java.awt.Toolkit;
 import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -139,6 +143,8 @@ public class Pengguna extends javax.swing.JFrame {
         ButtonRefresh = new javax.swing.JButton();
         TextPencarian = new javax.swing.JTextField();
         ButtonCari = new javax.swing.JButton();
+        ButtonUpdate = new javax.swing.JButton();
+        ButtonHapus = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu6 = new javax.swing.JMenu();
         jMenu1 = new javax.swing.JMenu();
@@ -172,7 +178,7 @@ public class Pengguna extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 11)); // NOI18N
         jLabel6.setText("Password");
 
-        ButtonSimpanPengguna.setText("Kirim");
+        ButtonSimpanPengguna.setText("Submit");
         ButtonSimpanPengguna.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ButtonSimpanPenggunaActionPerformed(evt);
@@ -212,6 +218,27 @@ public class Pengguna extends javax.swing.JFrame {
         });
 
         ButtonCari.setText("Cari");
+        ButtonCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonCariActionPerformed(evt);
+            }
+        });
+
+        ButtonUpdate.setText("Update");
+        ButtonUpdate.setEnabled(false);
+        ButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonUpdateActionPerformed(evt);
+            }
+        });
+
+        ButtonHapus.setText("Hapus");
+        ButtonHapus.setEnabled(false);
+        ButtonHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonHapusActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -220,9 +247,9 @@ public class Pengguna extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,47 +264,53 @@ public class Pengguna extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(UsernamePengguna)
                                     .addComponent(EmailPengguna)
-                                    .addComponent(NamaPengguna)
-                                    .addComponent(PasswordPengguna)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(38, 38, 38)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
+                                    .addComponent(PasswordPengguna)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(ButtonBersihkanPengguna)
+                                        .addComponent(NamaPengguna, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addGap(39, 39, 39))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(97, 97, 97)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ButtonUpdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(ButtonBersihkanPengguna, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(ButtonSimpanPengguna, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(49, 49, 49)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(LabelJumlahData)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TextPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(ButtonCari)
-                                    .addGap(4, 4, 4)))
-                            .addComponent(ButtonRefresh, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addComponent(ButtonSimpanPengguna, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(ButtonHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ButtonRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(LabelJumlahData)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(TextPencarian, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(ButtonCari)))
+                                .addGap(4, 4, 4)))
                         .addGap(11, 11, 11))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel1))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(LabelJam)
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel2)))))
+                        .addComponent(LabelJam)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel2)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -310,7 +343,10 @@ public class Pengguna extends javax.swing.JFrame {
                             .addComponent(ButtonSimpanPengguna)
                             .addComponent(ButtonBersihkanPengguna))))
                 .addGap(18, 18, 18)
-                .addComponent(ButtonRefresh)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonRefresh)
+                    .addComponent(ButtonUpdate)
+                    .addComponent(ButtonHapus))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelJam)
@@ -396,6 +432,10 @@ public class Pengguna extends javax.swing.JFrame {
        NamaPengguna.setText("");
        EmailPengguna.setText("");
        PasswordPengguna.setText("");
+       
+       ButtonUpdate.setEnabled(false);
+       ButtonHapus.setEnabled(false);
+       ButtonSimpanPengguna.setEnabled(true);
     }//GEN-LAST:event_ButtonBersihkanPenggunaActionPerformed
 
     private void ButtonSimpanPenggunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonSimpanPenggunaActionPerformed
@@ -405,6 +445,17 @@ public class Pengguna extends javax.swing.JFrame {
         Username    = UsernamePengguna.getText();
         Email       = EmailPengguna.getText();
         Pwd         = PasswordPengguna.getText();
+        
+        if (Nama.trim().isEmpty() && !Nama.matches("[a-zA-Z_]+")) {
+            JOptionPane.showMessageDialog(null, "Format Nama yang diizinkan: A-Z");
+            return;
+        }else if (Email.trim().isEmpty() && !Email.matches("[a-zA-Z0-9@.]")){
+            JOptionPane.showMessageDialog(null, "Format Email yang diizinkan: a-zA-Z0-9");
+            return;
+        }else if (Username.trim().isEmpty() && !Username.matches("[a-z]")) {
+            JOptionPane.showMessageDialog(null, "Format Username yang diizinkan: a-z");
+            return;
+        }
         
         try {
             conn.createStatement().executeUpdate("INSERT INTO pengguna (nama, email, username, password) VALUES ("
@@ -417,6 +468,7 @@ public class Pengguna extends javax.swing.JFrame {
         } catch (Exception e){
             // tampilkan pesan kesalahan try catch
             JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
         }
     }//GEN-LAST:event_ButtonSimpanPenggunaActionPerformed
 
@@ -446,6 +498,91 @@ public class Pengguna extends javax.swing.JFrame {
     private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         new Bantuan().setVisible(true); dispose();
     }//GEN-LAST:event_jMenu4MouseClicked
+
+    private void ButtonCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonCariActionPerformed
+        // TODO add your handling code here:
+        String q = TextPencarian.getText();
+        if (q.matches("[a-z@0-9.A-Z_]+")){
+            try {
+                res = conn.createStatement().executeQuery("SELECT * FROM pengguna "
+                        + "WHERE "
+                        + " id = '"+q+"' OR "
+                        + " nama = '"+q+"' OR "
+                        + " email = '"+q+"' OR"
+                        + " username = '"+q+"' ");
+                while (res.next()){
+                    NamaPengguna.setText(res.getString("nama"));
+                    EmailPengguna.setText(res.getString("email"));
+                    UsernamePengguna.setText(res.getString("username"));
+                    PasswordPengguna.setText(res.getString("password"));
+                }
+                ButtonUpdate.setEnabled(true);
+                ButtonHapus.setEnabled(true);
+                ButtonSimpanPengguna.setEnabled(false);
+                initDataTable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Terdapat Kesalahan: " + e);
+                return;
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Data yang dimasukan tidak valid.");
+            return;
+        }
+    }//GEN-LAST:event_ButtonCariActionPerformed
+
+    private void ButtonUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonUpdateActionPerformed
+        // TODO add your handling code here:
+        int conf = JOptionPane.showConfirmDialog(null, "Apakah kamu yakin ingin mengupdate data ini ?", "Confirmation" , JOptionPane.YES_NO_OPTION);
+        if (conf == 0){
+            try {
+                String q = TextPencarian.getText();
+                PreparedStatement st;
+                String sql = "UPDATE pengguna SET "
+                        + "nama = ?, "
+                        + "email = ?, "
+                        + "username = ?, "
+                        + "password= ? "
+                        + "WHERE "
+                        + "nama ='"+q+"' OR "
+                        + "email ='"+q+"' OR "
+                        + "username = '"+q+"' ";
+                st = conn.prepareStatement(sql);
+                
+                st.setString(1, NamaPengguna.getText());
+                st.setString(2, EmailPengguna.getText());
+                st.setString(3, UsernamePengguna.getText().toString());
+                st.setString(4, PasswordPengguna.getText());
+                st.executeUpdate();
+                JOptionPane.showMessageDialog(null, "Data berhasil diupdate");
+                initDataTable();
+            } catch (SQLException ex) {
+                Logger.getLogger(Pengguna.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_ButtonUpdateActionPerformed
+
+    private void ButtonHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonHapusActionPerformed
+        // TODO add your handling code here:
+        int confirm = JOptionPane.showConfirmDialog(null, "Apakah kamu yakin ingin menghapus data ini ?", "Confirmation" , JOptionPane.YES_NO_OPTION);
+        if (confirm == 0){
+            PreparedStatement st;
+            String q = TextPencarian.getText();
+            try {
+                String sql = "DELETE FROM pengguna "
+                        + "WHERE "
+                        + " id = '"+q+"' OR "
+                        + " nama = '"+q+"' OR "
+                        + " email = '"+q+"' OR"
+                        + " username = '"+q+"'";
+                st = conn.prepareStatement(sql);
+                st.execute();
+                JOptionPane.showMessageDialog(null, "Data berhasil menghapus data");
+                initDataTable();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Data gagal menghapus data, karena: " + ex);
+            }
+        }
+    }//GEN-LAST:event_ButtonHapusActionPerformed
 
     /**
      * @param args the command line arguments
@@ -485,8 +622,10 @@ public class Pengguna extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ButtonBersihkanPengguna;
     private javax.swing.JButton ButtonCari;
+    private javax.swing.JButton ButtonHapus;
     private javax.swing.JButton ButtonRefresh;
     private javax.swing.JButton ButtonSimpanPengguna;
+    private javax.swing.JButton ButtonUpdate;
     private javax.swing.JTextField EmailPengguna;
     private javax.swing.JLabel LabelJam;
     private javax.swing.JLabel LabelJumlahData;

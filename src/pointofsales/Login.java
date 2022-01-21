@@ -154,7 +154,6 @@ public class Login extends javax.swing.JFrame {
                             .addComponent(jam)
                             .addGap(15, 15, 15))
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(26, 26, 26)
                             .addComponent(LabelJam)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2))
