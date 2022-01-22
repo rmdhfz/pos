@@ -5,6 +5,7 @@
  */
 package pointofsales;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,6 +14,12 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -135,6 +142,7 @@ public class masterbarang extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        CetakBarang = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu7 = new javax.swing.JMenu();
         jMenu8 = new javax.swing.JMenu();
@@ -305,6 +313,14 @@ public class masterbarang extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(153, 153, 153));
         jLabel1.setText("Dashboard / Master Barang");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 30, -1, -1));
+
+        CetakBarang.setText("Cetak");
+        CetakBarang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CetakBarangActionPerformed(evt);
+            }
+        });
+        getContentPane().add(CetakBarang, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 100, -1));
 
         jMenu7.setText("Dashboard");
         jMenu7.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -495,6 +511,18 @@ public class masterbarang extends javax.swing.JFrame {
         new Transaksi().setVisible(true); dispose();
     }//GEN-LAST:event_MenuTransaksiMouseClicked
 
+    private void CetakBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CetakBarangActionPerformed
+        // TODO add your handling code here:
+        File namafile = new File("src/Laporan/barang.jasper");
+        JasperPrint jp = null;
+        try {
+            jp = JasperFillManager.fillReport(namafile.getPath(), null, conn);
+        } catch (JRException ex) {
+            Logger.getLogger(Pengguna.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        JasperViewer.viewReport(jp, false);
+    }//GEN-LAST:event_CetakBarangActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -531,6 +559,7 @@ public class masterbarang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton CetakBarang;
     private javax.swing.JLabel LabelJam;
     private javax.swing.JMenu MenuTransaksi;
     private javax.swing.JButton btnclear;

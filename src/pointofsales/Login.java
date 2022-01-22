@@ -226,6 +226,14 @@ public class Login extends javax.swing.JFrame {
         Username = TextBoxUsername.getText();
         Password = TextBoxPassword.getText();
         
+        if (Username.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username Tidak boleh kosong!");
+            return;
+        }else if (Password.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password Tidak boleh kosong!");
+            return;
+        }
+        
         try {
             
             SQL = "SELECT username, password FROM "+TabelPengguna+" WHERE username ='"+Username+"' AND password ='"+Password+"'";

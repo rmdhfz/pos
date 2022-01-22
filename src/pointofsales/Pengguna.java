@@ -30,6 +30,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.view.JasperViewer;
+//import net.sf.jasperreports.compilers.GroovyEvaluator;
 
 /**
  *
@@ -304,7 +305,7 @@ public class Pengguna extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(ButtonHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ButtonCetak)
+                                .addComponent(ButtonCetak, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(ButtonRefresh, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -492,8 +493,11 @@ public class Pengguna extends javax.swing.JFrame {
                 + "'" + Pwd +"')");
             JOptionPane.showMessageDialog(null, "Berhasil menyimpan data!");
             initDataTable();
+            JumlahDataTable();
         } catch (Exception e){
             // tampilkan pesan kesalahan try catch
+            initDataTable();
+            JumlahDataTable();
             JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
@@ -501,6 +505,7 @@ public class Pengguna extends javax.swing.JFrame {
 
     private void ButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonRefreshActionPerformed
         initDataTable();
+        JumlahDataTable();
     }//GEN-LAST:event_ButtonRefreshActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

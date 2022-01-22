@@ -155,7 +155,13 @@ public class LupaPassword extends javax.swing.JFrame {
         
         Username = TextBoxUsername.getText();
         NewPassword = TextBoxNewPassword.getText();
-        
+        if (Username.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Username Tidak boleh kosong!");
+            return;
+        }else if (NewPassword.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Password Baru Tidak boleh kosong!");
+            return;
+        }
         try {
             res = conn.createStatement().executeQuery("SELECT * FROM "+TabelPengguna+" WHERE username = '"+Username+"'");
             if (res.next()){
